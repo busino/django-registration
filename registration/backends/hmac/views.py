@@ -31,6 +31,7 @@ class RegistrationView(BaseRegistrationView):
     """
     email_body_template = 'registration/activation_email.txt'
     email_subject_template = 'registration/activation_email_subject.txt'
+    success_url = 'registration_complete'
 
     def register(self, form):
         new_user = self.create_inactive_user(form)
@@ -40,7 +41,7 @@ class RegistrationView(BaseRegistrationView):
         return new_user
 
     def get_success_url(self, user):
-        return ('registration_complete', (), {})
+        return (self.success_url, (), {})
 
     def create_inactive_user(self, form):
         """
